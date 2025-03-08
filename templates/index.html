@@ -1,0 +1,165 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIKIMON - Search Pokémon</title>
+    <!-- Add Pokémon-themed fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Pokémon elements */
+        .pokemon-element {
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+        }
+
+        /* Main Container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            z-index: 10;
+            margin-top: 100px;
+        }
+
+        h1 {
+            color: #fff;
+            font-weight: 600;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 24px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        input {
+            padding: 12px;
+            width: 220px;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        
+        }
+
+        input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        button {
+            background: #ffcc00;
+            color: #333;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {22
+            background: #ffdb4d;
+            transform: scale(1.1);
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 30px;
+            color: #ffcc00;
+            font-size: 24px;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(255, 204, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <img class="logo" src="{% static 'LOGO.png' %}" alt="WIKIMON Logo">
+
+    <!-- Pokémon Elements -->
+    <div class="pokemon-element pokeball-1" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; left: 10%;"></div>
+    <div class="pokemon-element pokeball-2" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; right: 10%;"></div>
+    <div class="pokemon-element pikachu" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'); top: 30%; left: 5%;"></div>
+    <div class="pokemon-element charmander" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'); top: 30%; right: 5%;"></div>
+    <div class="pokemon-element bulbasaur" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'); top: 50%; left: 10%;"></div>
+    <div class="pokemon-element squirtle" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png'); top: 50%; right: 10%;"></div>
+    <div class="pokemon-element jigglypuff" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png'); top: 70%; left: 5%;"></div>
+    <div class="pokemon-element meowth" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png'); top: 70%; right: 5%;"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <h1>Search Your Pokémon</h1>
+        <form class="search-box" method="GET" action="{% url 'info' %}">
+            <input type="text" name="pokemon_name" placeholder="Enter Pokémon Name" required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer>Gotta Catch 'Em All!</footer>
+</body>
+</html>

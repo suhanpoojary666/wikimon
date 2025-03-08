@@ -1,0 +1,177 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{poki_info.name}} - Details</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 90%;
+            max-width: 500px;
+            margin: 120px auto 20px;
+            animation: slideIn 1.5s ease-in-out;
+            position: relative;
+            z-index: 0;
+        }
+
+        /* Pokémon Name as Title */
+        .container h1 {
+            color: #fff;
+            font-weight: 700;
+            font-size: 32px;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Pokémon Image */
+        .container img {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+        }
+
+        /* Details Section */
+        .details {
+            text-align: left;
+            color: #fff;
+        }
+
+        .details p {
+            margin: 10px 0;
+            font-size: 16px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .details strong {
+            color: #ffcc00;
+            margin-right: 10px;
+        }
+
+        /* Go Back Button */
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ffcc00;
+            color: #333;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        a:hover {
+            transform: scale(1.05);
+            background: #ffdb4d;
+            box-shadow: 0 4px 15px rgba(255, 204, 0, 0.4);
+        }
+
+        /* Floating Elements */
+        .pokemon-element {
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Slide-in Animation */
+        @keyframes slideIn {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Logo -->
+    <img class="logo" src="{% static 'LOGO.png' %}" alt="WIKIMON Logo">
+
+    <!-- Floating Pokémon Elements -->
+    <div class="pokemon-element pokeball-1" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; left: 10%;"></div>
+    <div class="pokemon-element pokeball-2" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; right: 10%;"></div>
+    <div class="pokemon-element pikachu" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'); top: 30%; left: 5%;"></div>
+    <div class="pokemon-element charmander" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'); top: 30%; right: 5%;"></div>
+    <div class="pokemon-element bulbasaur" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'); top: 50%; left: 10%;"></div>
+    <div class="pokemon-element squirtle" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png'); top: 50%; right: 10%;"></div>
+    <div class="pokemon-element jigglypuff" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png'); top: 70%; left: 5%;"></div>
+    <div class="pokemon-element meowth" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png'); top: 70%; right: 5%;"></div>
+
+    <!-- Container -->
+    <div class="container">
+        <h1>{{poki_info.name}}</h1> <!-- Pokémon Name as Title -->
+        <img src="{{poki_info.image}}" alt="{{poki_info.name}}">
+        <div class="details">
+            <p><strong>TYPE:</strong> {{poki_info.type}}</p>
+            <p><strong>ID:</strong> {{poki_info.Id}}</p>
+            <p><strong>HEIGHT:</strong> {{poki_info.height}}</p>
+            <p><strong>GENERATION:</strong> {{poki_info.generation}}</p>
+            <p><strong>HABITAT:</strong> {{poki_info.habitat}}</p>
+            <p><strong>COLOR:</strong> {{poki_info.colour}}</p>
+        </div>
+        <a href="{% url 'index' %}">Go Back</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WIKIMON - Pokémon Not Found</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Floating Pokémon elements */
+        .pokemon-element {
+            position: absolute;
+            background-repeat: no-repeat;
+            background-size: contain;
+            opacity: 0.2;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+            width: 100px;
+            height: 100px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Logo */
+        .logo {
+            position: absolute;
+            top: 50px; /* Adjusted to bring the logo a little bit down */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px; /* Adjusted width to fit the design */
+            height: auto;
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+            z-index: 1; /* Ensure the logo is above other elements */
+        }
+
+        /* Error Message Container */
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(15px);
+            width: 90%;
+            max-width: 450px;
+            animation: fadeIn 1.5s ease-in-out;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 180px; /* Adjusted to avoid overlapping with the logo */
+            position: relative;
+            z-index: 0; /* Ensure the container stays below the logo */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-weight: 600;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        .error-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: #ffcc00;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            background: #ffcc00;
+            color: #333;
+            padding: 10px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #ffd633;
+        }
+    </style>
+</head>
+<body>
+    <!-- Pokémon Elements -->
+    <div class="pokemon-element pokeball-1" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; left: 10%;"></div>
+    <div class="pokemon-element pokeball-2" style="background-image: url('https://www.freepnglogos.com/uploads/pokeball-png/pokeball-pokemon-theme-team-ideas-for-pokemon-sun-and-moon-24.png'); top: 10%; right: 10%;"></div>
+    <div class="pokemon-element pikachu" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png'); top: 30%; left: 5%;"></div>
+    <div class="pokemon-element charmander" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/4.png'); top: 30%; right: 5%;"></div>
+    <div class="pokemon-element bulbasaur" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png'); top: 50%; left: 10%;"></div>
+    <div class="pokemon-element squirtle" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png'); top: 50%; right: 10%;"></div>
+    <div class="pokemon-element jigglypuff" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/39.png'); top: 70%; left: 5%;"></div>
+    <div class="pokemon-element meowth" style="background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/52.png'); top: 70%; right: 5%;"></div>
+
+    <!-- Logo -->
+    <img class="logo" src="{% static 'LOGO.png' %}" alt="WIKIMON Logo">
+
+    <!-- Error Container -->
+    <div class="container">
+        <div class="error-icon">⚠️</div>
+        <h1>"{{name}}" doesn't exist</h1>
+        <p>Oops! It looks like the Pokémon you searched for doesn’t exist.</p>
+        <p>Try entering a valid Pokémon name.</p>
+        <a class="back-btn" href="{% url 'index' %}">Go Back</a>
+    </div>
+</body>
+</html>
